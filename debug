@@ -1,1 +1,16 @@
-Makefile的文件
+1. 在执行./dump_data input.s16 out.f32 out.u8时，如果报错
+‘ Illegal instruction'，说明机器指令集不匹配
+2. 修改Makefile的文件开头的
+   AVX2:=$(shell cat /proc/cpuinfo | grep -c avx2)
+   AVX:=$(shell cat /proc/cpuinfo | grep -c avx)
+   NEON:=$(shell cat /proc/cpuinfo | grep -c neon)
+   为
+   AVX2:=0
+   AVX:=$(shell cat /proc/cpuinfo | grep -c avx)
+   NEON:=$(shell cat /proc/cpuinfo | grep -c neon)
+3. 然后make clean,重新编译生成dump_data，重新./dump_data input.s16 out.f32 out.u8
+4. 如果继续报错，修改Makefile的文件开头为下边，然后重复3，就可以了
+    AVX2:=0
+    AVX:=2
+    NEON:=0
+    

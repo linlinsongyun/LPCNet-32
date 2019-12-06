@@ -21,7 +21,7 @@ for i in range(0,len(list)):
    d_len = len(d_str)
    print("list",list[i])
    print("len",d_len)
-   j=d_len/196
+   j=d_len//196
    data = struct.unpack(str(d_len/4)+'f',d_str)
    # 1feature ---byte4
    c=np.array(data)
